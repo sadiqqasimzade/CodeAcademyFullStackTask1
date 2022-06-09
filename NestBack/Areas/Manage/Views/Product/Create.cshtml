@@ -1,0 +1,89 @@
+﻿@model Product
+@{
+	ViewData["Title"] = "Create";
+}
+
+<section class="content-main">
+	<div class="row">
+		<div class="col-9">
+			<div class="content-header">
+				<h2 class="content-title">Add New Product</h2>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="card mb-4">
+				<div class="card-body">
+					<form method="post" enctype="multipart/form-data">
+						<div class="mb-4">
+							<label asp-for="Name" class="form-label">Name</label>
+							<input asp-for="Name" placeholder="Type here" class="form-control" />
+							<span class="text-danger" asp-validation-for="Name"></span>
+						</div>
+						<div class="mb-4">
+							<label asp-for="Desc" class="form-label">Description</label>
+							<textarea asp-for="Desc" placeholder="Type here" class="form-control" rows="4"></textarea>
+							<span class="text-danger" asp-validation-for="Desc"></span>
+						</div>
+						<div class="row form-group">
+							<div class="mb-4 col-4">
+								<label asp-for="Price" class="form-label">Price</label>
+								<input placeholder="$" asp-for="Price" class="form-control" />
+								<span class="text-danger" asp-validation-for="Price"></span>
+							</div>
+
+							<div class="mb-4 col-4">
+								<label asp-for="Raiting" class="form-label">Raiting</label>
+								<input asp-for="Raiting" class="form-control" />
+								<span class="text-danger" asp-validation-for="Raiting"></span>
+							</div>
+
+							<div class="mb-4 col-4">
+								<label asp-for="Stock" class="form-label">Stock</label>
+								<input asp-for="Stock" class="form-control" />
+								<span class="text-danger" asp-validation-for="Stock"></span>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="mb-4 col-4">
+								<label asp-for="DiscountPrice" class="form-label">Discount</label>
+								<input placeholder="$" asp-for="DiscountPrice" class="form-control" />
+								<span class="text-danger" asp-validation-for="DiscountPrice"></span>
+							</div>
+
+							<div class="mb-4 col-4">
+								<label asp-for="BuyPrice" class="form-label">Buy Price</label>
+								<input placeholder="$"  asp-for="BuyPrice" class="form-control" />
+								<span class="text-danger" asp-validation-for="BuyPrice"></span>
+							</div>
+
+							<div class="mb-4 col-4">
+								<label asp-for="CategoryId" class="form-label">Category</label>
+								<select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categories,nameof(Category.Id),nameof(Category.Name)))"></select>
+								<span class="text-danger" asp-validation-for="CategoryId"></span>
+							</div>
+						</div>
+
+						<div class="mb-4">
+							<label asp-for="File" class="form-label">Photos (first selected will be front)</label>
+							<input multiple asp-for="File" class="form-control" />
+							<span class="text-danger" asp-validation-for="File"></span>
+						</div>
+
+						<div class="mt-5">
+							<a asp-action="Index" class="btn btn-light rounded font-sm mr-5 text-body hover-up">Cancel</a>
+							<button type="submit" class="btn btn-md rounded font-sm hover-up">Create</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- card end// -->
+
+		</div>
+	</div>
+</section>
+
+@section scripts{
+<partial name="~/Areas/Manage/Views/Shared/_ValidationPartial.cshtml" />
+}
+
+

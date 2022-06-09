@@ -1,0 +1,64 @@
+﻿@model Slider
+@{
+	ViewData["Title"] = "Create";
+}
+
+
+<section class="content-main">
+	<div class="row">
+		<div class="col-9">
+			<div class="content-header">
+				<h2 class="content-title">Add New Slider</h2>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="card mb-4">
+				<div class="card-body">
+					<form method="post" enctype="multipart/form-data">
+						<div class="mb-4">
+							<label asp-for="Title" class="form-label">Title</label>
+							<input asp-for="Title" placeholder="Type here" class="form-control" />
+							<span class="text-danger" asp-validation-for="Title"></span>
+						</div>
+						<div class="mb-4">
+							<label asp-for="Desc" class="form-label">Description</label>
+							<textarea asp-for="Desc" placeholder="Type here" class="form-control" rows="4"></textarea>
+							<span class="text-danger" asp-validation-for="Desc"></span>
+						</div>
+						<div class="col-lg-5">
+							<div class="card mb-4">
+								<div class="card-header">
+									<h4>Media</h4>
+								</div>
+								<div class="card-body">
+									<div class="input-upload">
+										<img src="~/admin/assets/imgs/theme/upload.svg" alt="" />
+										<input  asp-for="Photo" class="form-control" accept="image/*" />
+										<span class="text-danger" class="text-danger" asp-validation-for="Photo"></span>
+									</div>
+								</div>
+							</div>
+							<!-- card end// -->
+						</div>
+						<div>
+							<a asp-action="Index" class="btn btn-light rounded font-sm mr-5 text-body hover-up">Cancel</a>
+							<button type="submit" class="btn btn-md rounded font-sm hover-up">Create</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- card end// -->
+
+		</div>
+		
+	</div>
+</section>
+
+@section scripts{
+	<partial name="~/Areas/Manage/Views/Shared/_ValidationPartial.cshtml" />
+}
+
+
+
+

@@ -1,0 +1,17 @@
+﻿
+
+2)make all list => enum? (LOW PRIORITY)
+
+3)notfound => status code => ajax?fetch?
+
+5)
+
+7)Category:Warning when deleting used category  (Category.product.count>0)
+
+
+
+26)HOME=> category select btn all not working properly
+
+
+//admin
+Admin:AdminAdmin1

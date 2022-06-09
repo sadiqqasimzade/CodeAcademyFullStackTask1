@@ -1,0 +1,123 @@
+﻿@model List<Product>
+@{
+	ViewData["Title"] = "Index";
+}
+@section styles{
+<style>
+	.card-product-grid .img-wrap {
+		height: 15vh;
+	}
+</style>
+}
+<section class="content-main">
+	<div class="content-header">
+		<div>
+			<h2 class="content-title card-title">Products grid</h2>
+		</div>
+		<div>
+			@*                        <a href="#" class="btn btn-light rounded font-md">Export</a>
+				<a href="#" class="btn btn-light rounded font-md">Import</a>*@
+			<a asp-controller="Product" asp-action="Create" class="btn btn-primary btn-sm rounded">Create new</a>
+		</div>
+	</div>
+	<div class="card mb-4">
+		<header class="card-header">
+			<div class="row gx-3">
+				<div class="col-lg-4 col-md-6 me-auto">
+					<input type="text" placeholder="Search..." class="form-control" />
+				</div>
+				<div class="col-lg-2 col-6 col-md-3">
+					<select class="form-select">
+						<option>All category</option>
+						<option>Electronics</option>
+						<option>Clothings</option>
+						<option>Something else</option>
+					</select>
+				</div>
+				<div class="col-lg-2 col-6 col-md-3">
+					<select class="form-select">
+						<option>Latest added</option>
+						<option>Cheap first</option>
+						<option>Most viewed</option>
+					</select>
+				</div>
+			</div>
+		</header>
+		<!-- card-header end// -->
+		<div class="card-body">
+			<div class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
+				@foreach (var item in Model)
+				{
+					<form method="post" class="col">
+						<div class="card card-product-grid">
+							@if(item.productImgs.FirstOrDefault(pi=>pi.IsFront==true)!=null)
+							{
+								<a href="#" class="img-wrap mt-5"> <img src="~/imgs/products/@item.productImgs.FirstOrDefault().Img" alt="@item.Name" /> </a>
+							}
+							else
+							{
+								<a href="#" class="img-wrap mt-5"> <img src="~/imgs/products/404.jpg" /> </a>	
+							}
+							<div class="info-wrap">
+								<a href="#" class="title d-flex justify-content-between "> <span class=" ">@item.Name</span> <span class="text-truncate">@item.Category.Name</span> </a>
+								<div class="price mb-2">$@item.Price</div>
+								<!-- price.// -->
+								<a  asp-action="Update" asp-controller="Product" asp-route-id=@item.Id class="btn btn-sm font-sm rounded btn-brand"> <i class="material-icons md-edit"></i> Edit </a>
+								<button type="submit" asp-action="ChangeState" asp-controller="Product" asp-route-id=@item.Id class="btn btn-sm font-sm rounded btn-brand"> <i class="material-icons md-edit"></i> @(item.IsDeleted==true?"Enable":"Disable") </button>
+								<button type="submit" asp-action="Delete" asp-route-id="@item.Id"  class="btn btn-sm font-sm btn-light rounded"> <i class="material-icons md-delete_forever"></i> Permanent Delete </button>
+							</div>
+						</div>
+						<!-- card-product  end// -->
+				</form>
+				}
+
+				<!-- col.// -->
+			</div>
+			<!-- row.// -->
+		</div>
+		<!-- card-body end// -->
+	</div>
+	<!-- card end// -->
+	<div class="pagination-area mt-30 mb-50">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-start">
+				<li class="page-item active"><a class="page-link" href="#">01</a></li>
+				<li class="page-item"><a class="page-link" href="#">02</a></li>
+				<li class="page-item"><a class="page-link" href="#">03</a></li>
+				<li class="page-item"><a class="page-link dot" href="#">...</a></li>
+				<li class="page-item"><a class="page-link" href="#">16</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</section>
+@section scripts{
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+						function Del()
+						{
+						Swal.fire({
+	  title: '<strong>HTML <u>example</u></strong>',
+	  icon: 'info',
+	  html:
+		'Are you sure <b>Delete</b>, ' +
+	  showCloseButton: true,
+	  showCancelButton: true,
+	  focusConfirm: false,
+	  confirmButtonText:
+		'delete',
+	  cancelButtonText:
+		'cancel',
+
+	}).then((result) => {
+	  /* Read more about isConfirmed, isDenied below */
+	  if (result.isConfirmed) {
+		Swal.fire('deleted')
+	  } else if (result.isDenied) {
+		Swal.fire('Changes are not saved', '', 'info')
+	  }
+	}
+</script>
+            }
